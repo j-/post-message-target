@@ -5,24 +5,24 @@ const log = (message: string) => {
 };
 
 window.addEventListener("message", (e) => {
-  if (e.data.command !== "PROCESS") return;
-  log(`GOT MESSAGE (${e.type}) ${JSON.stringify(e.data, null, 2)}`);
+  if (!e.data.command) return;
+  log(`Got ${e.data.command} message\n${JSON.stringify(e.data, null, 2)}`);
 });
 
-log("SENDING READY MESSAGE");
-window.parent.postMessage({ event: "READY" }, "*");
+const payload = { event: "READY" };
+log(`Sending READY message\n${JSON.stringify(payload, null, 2)}`);
+window.parent.postMessage(payload, "*");
 
 document.getElementById("send")!.addEventListener("click", (e) => {
   e.preventDefault();
-  window.parent.postMessage(
-    {
-      event: "SEND",
-      variables: {
-        timestamp: Date.now(),
-        message: "Success",
-        proceed: "yes",
-      },
+  const payload = {
+    event: "SEND",
+    variables: {
+      timestamp: Date.now(),
+      message: "Success",
+      proceed: "yes",
     },
-    "*"
-  );
+  };
+  log(`Sending PROCEED message\n${JSON.stringify(payload, null, 2)}`);
+  window.parent.postMessage(payload, "*");
 });
