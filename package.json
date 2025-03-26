@@ -8,7 +8,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "start": "parcel index.html",
-    "build": "parcel build index.html --out-file index.html"
+    "build": "parcel build index.html --out-file index.html --public-url https://skeoh.com/post-message-target"
   },
   "dependencies": {
     "parcel-bundler": "1.6.1"
