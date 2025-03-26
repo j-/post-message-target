@@ -11,3 +11,18 @@ window.addEventListener("message", (e) => {
 
 log("SENDING READY MESSAGE");
 window.parent.postMessage({ event: "READY" }, "*");
+
+document.getElementById("send")!.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.parent.postMessage(
+    {
+      event: "SEND",
+      variables: {
+        timestamp: Date.now(),
+        message: "Success",
+        proceed: "yes",
+      },
+    },
+    "*"
+  );
+});
